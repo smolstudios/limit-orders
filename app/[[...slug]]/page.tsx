@@ -1,3 +1,5 @@
+import { OrderbookChart } from "@/components/OrderbookChart";
+
 export default function Page({
   params,
 }: {
@@ -7,6 +9,7 @@ export default function Page({
     <div>
       <div className="relative z-10 flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-start p-4">
+          <OrderbookChart height={400} width={800} />
           <p className="mb-6 text-8xl font-medium text-white">
             {params.slug?.map((s) => {
               return <span key={s}> {s} </span>;
