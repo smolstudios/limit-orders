@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "predev": "pnpm wagmi generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -26,6 +27,7 @@
     "zustand": "^4.3.2"
   },
   "devDependencies": {
+    "@wagmi/cli": "^0.1.10",
     "autoprefixer": "^10.4.4",
     "encoding": "^0.1.13",
     "eslint": "^8.32.0",
