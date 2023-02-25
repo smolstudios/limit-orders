@@ -35,3 +35,6 @@ yarn-error.log*
 .vercel
 package-lock.json
 .vscode
+
+# generated
+web3/generated.tsx
