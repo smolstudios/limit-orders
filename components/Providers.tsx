@@ -1,27 +1,31 @@
 "use client";
 
-// import { ThemeProvider } from "acme-theme";
-// import { AuthProvider } from "acme-auth";
-
+import { useState } from "react";
 import { WagmiConfig, createClient } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const client = createClient(
   getDefaultClient({
-    appName: "ConnectKit Next.js demo",
+    appName: "limitorders.xyz",
     //infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
     //alchemyId:  process.env.NEXT_PUBLIC_ALCHEMY_ID,
-    chains: [mainnet, polygon, optimism, arbitrum],
+    chains: [mainnet, polygon],
   })
 );
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <>
-      <WagmiConfig client={client}>
-        <ConnectKitProvider>{children}</ConnectKitProvider>
-      </WagmiConfig>
+      <QueryClientProvider client={queryClient}>
+        <WagmiConfig client={client}>
+          <ConnectKitProvider>{children}</ConnectKitProvider>
+        </WagmiConfig>
+      </QueryClientProvider>
     </>
   );
 }

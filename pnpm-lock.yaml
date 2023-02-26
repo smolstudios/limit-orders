@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@collectable/red-black-tree': ^5.1.1
   '@rainbow-me/rainbowkit': ^0.11.0
+  '@tanstack/react-query': ^4.24.10
+  '@tanstack/react-query-devtools': ^4.24.10
   '@types/d3-array': ^3.0.4
   '@types/lodash': ^4.14.191
   '@types/node': ^18.14.1
@@ -42,6 +44,8 @@ specifiers:
 dependencies:
   '@collectable/red-black-tree': 5.1.1
   '@rainbow-me/rainbowkit': 0.11.0_n6t5aahpmtkwjlwfqif42jvo7q
+  '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query-devtools': 4.24.10_636dldj5wfr5vkyyqzs5k363kq
   '@types/node': 18.14.1
   '@types/react': 18.0.28
   '@vx/axis': 0.0.199_react@18.2.0
@@ -1196,6 +1200,13 @@ packages:
       tslib: 2.5.0
     dev: false
 
+  /@tanstack/match-sorter-utils/8.7.6:
+    resolution: {integrity: sha512-2AMpRiA6QivHOUiBpQAVxjiHAA68Ei23ZUMNaRJrN6omWiSFLoYrxGcT6BXtuzp0Jw4h6HZCmGGIM/gbwebO2A==}
+    engines: {node: '>=12'}
+    dependencies:
+      remove-accents: 0.4.2
+    dev: false
+
   /@tanstack/query-core/4.24.10:
     resolution: {integrity: sha512-2QywqXEAGBIUoTdgn1lAB4/C8QEqwXHj2jrCLeYTk2xVGtLiPEUD8jcMoeB2noclbiW2mMt4+Fq7fZStuz3wAQ==}
 
@@ -1208,6 +1219,21 @@ packages:
     resolution: {integrity: sha512-bS/vUHmzlnj7FiUZaPEUsEPitiaX2bzPJ9DuqQf7HCNMgqV/pwie90q90XIpGHUw8cF/6e3RnHF346OkH/XehQ==}
     dependencies:
       '@tanstack/query-persist-client-core': 4.24.10
+
+  /@tanstack/react-query-devtools/4.24.10_636dldj5wfr5vkyyqzs5k363kq:
+    resolution: {integrity: sha512-1uzJNLdLjRsNt4O5ldv1SYPevWvSdHtKIyVJeUv4hSERPEhrKKfa8WC3dBOX24CdLEYH2ndLZW4ZiC9nzSKCtg==}
+    peerDependencies:
+      '@tanstack/react-query': 4.24.10
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/match-sorter-utils': 8.7.6
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      superjson: 1.12.2
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
 
   /@tanstack/react-query-persist-client/4.24.10_ealzb334a6lsej726khr2zjck4:
     resolution: {integrity: sha512-Ta8PQua5aJK5F1w1ckX1xFnA4ohNpoeLUvApxtpMb3DKfs1XmyeFaddwyhP7La/EdjTtiInBJ2TmEAjG7EqhCw==}
@@ -2800,6 +2826,13 @@ packages:
       tslib: 2.5.0
       upper-case: 2.0.2
     dev: true
+
+  /copy-anything/3.0.3:
+    resolution: {integrity: sha512-fpW2W/BqEzqPp29QS+MwwfisHCQZtiduTe/m8idFo0xbti9fIZ2WVhAsCv4ggFVH3AgCkVdpoOCtQC6gBrdhjw==}
+    engines: {node: '>=12.13'}
+    dependencies:
+      is-what: 4.1.8
+    dev: false
 
   /copy-to-clipboard/3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
@@ -4621,6 +4654,11 @@ packages:
       get-intrinsic: 1.2.0
     dev: false
 
+  /is-what/4.1.8:
+    resolution: {integrity: sha512-yq8gMao5upkPoGEU9LsB2P+K3Kt8Q3fQFCGyNCWOAnJAMzEXVV9drYb0TXr42TTliLLhKIBvulgAXgtLLnwzGA==}
+    engines: {node: '>=12.13'}
+    dev: false
+
   /is-wsl/2.2.0:
     resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==}
     engines: {node: '>=8'}
@@ -5802,6 +5840,10 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
 
+  /remove-accents/0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
+
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -6160,6 +6202,13 @@ packages:
     dependencies:
       client-only: 0.0.1
       react: 18.2.0
+    dev: false
+
+  /superjson/1.12.2:
+    resolution: {integrity: sha512-ugvUo9/WmvWOjstornQhsN/sR9mnGtWGYeTxFuqLb4AiT4QdUavjGFRALCPKWWnAiUJ4HTpytj5e0t5HoMRkXg==}
+    engines: {node: '>=10'}
+    dependencies:
+      copy-anything: 3.0.3
     dev: false
 
   /superstruct/0.14.2:

@@ -29,7 +29,7 @@ export interface MetaData {
     createdAt: Date;
 }
 
-export interface Record {
+export interface OrderRecord {
     order: Order;
     metaData: MetaData;
 }
@@ -38,7 +38,7 @@ export interface OrderbookPaginatedFetchResult {
     total: number;
     page: number;
     perPage: number;
-    records: Record[];
+    records: OrderRecord[];
 }
 
 export interface OrderbookPaginatedFetchFilterParams {

@@ -1,6 +1,6 @@
 import { ofetch } from "ofetch";
 import qs from "query-string";
-import type { OrderbookPaginatedFetchFilterParams, OrderbookPaginatedFetchResult } from "./orderbook.types";
+import type { OrderbookPaginatedFetchFilterParams, OrderbookPaginatedFetchResult } from "./types";
 
 const fetchOrderbookOrders = (
   rootUrl: string = `https://api.0x.org`,

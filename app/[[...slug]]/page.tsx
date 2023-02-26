@@ -1,10 +1,29 @@
 import { OrderbookChart } from "@/components/OrderbookChart";
 
-export default function Page({
+const CACHE_TIME_KEY_IN_SECONDS = 30;
+
+async function getData() {
+  const res = await fetch('https://api.example.com/...', { next: { revalidate: CACHE_TIME_KEY_IN_SECONDS } });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+export default async function Page({
   params,
 }: {
   params: { slug: string[] | undefined };
 }) {
+
+  const data = await getData();
+
   return (
     <div>
       <div className="relative z-10 flex h-screen w-full items-center justify-center">
