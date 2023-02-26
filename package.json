@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@collectable/red-black-tree": "^5.1.1",
     "@rainbow-me/rainbowkit": "^0.11.0",
     "@types/node": "^18.14.1",
     "@types/react": "^18.0.28",
@@ -25,8 +26,11 @@
     "ethers": "5",
     "framer-motion": "^10.0.0",
     "immer": "^9.0.12",
+    "lodash": "^4.17.21",
     "next": "^13.1.5",
     "next-seo": "^5.1.0",
+    "ofetch": "^1.0.1",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
@@ -36,6 +40,7 @@
   },
   "devDependencies": {
     "@types/d3-array": "^3.0.4",
+    "@types/lodash": "^4.14.191",
     "@wagmi/cli": "^0.1.10",
     "autoprefixer": "^10.4.4",
     "encoding": "^0.1.13",
