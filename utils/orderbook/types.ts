@@ -23,14 +23,19 @@ export interface Order {
     pool: string;
 }
 
+export interface OrderExtendedAsNode extends Order {
+    amount: string;
+    price: bigint;
+}
+
 export interface MetaData {
     orderHash: string;
     remainingFillableTakerAmount: string;
     createdAt: Date;
 }
 
-export interface OrderRecord {
-    order: Order;
+export interface OrderRecord<T = Order> {
+    order: T;
     metaData: MetaData;
 }
 

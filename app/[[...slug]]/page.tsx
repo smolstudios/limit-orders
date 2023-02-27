@@ -1,4 +1,5 @@
 import { OrderbookChart } from "@/components/OrderbookChart";
+import { OrderbookPageClient } from "@/components/OrderbookPageClient";
 import { useOrdersRepository } from "@/hooks/useOrdersRepository";
 import { ZeroExV4OrderbookRepository } from "@/utils/orderbook/repository";
 import first from "lodash/first";
@@ -39,24 +40,7 @@ export default async function Page({
   }
   const [chainIdQueryParam, inputTokenQueryParam, outputTokenQueryParam] = slugParsed
 
-
-  const ordersRepository = new ZeroExV4OrderbookRepository()
-
-  // const orders = await ordersRepository.fetchOrdersFromRemoteOrderbookAllOrdersShortcut({
-
-  // })
-
-  // const firstbatch = first(orders)
-
-  // if (firstbatch) {
-  //   ordersRepository.ingestOrders(firstbatch.records, {
-  //     invalidatePreviousOrdersFromPair: true,
-
-  //   })
-  // }
-
-  // console.log('orders', orders[0].total)
-  // console.log('orders.length', orders.length)
+// 
 
   // const ordersRepository = useOrdersRepository()
 
@@ -69,6 +53,7 @@ export default async function Page({
       <div className="relative z-10 flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-start p-4">
           <OrderbookChart height={400} width={800} />
+          <OrderbookPageClient />
           <p className="mb-6 text-8xl font-medium text-white">
             {params.slug?.map((s) => {
               return <span key={s}> {s} </span>;

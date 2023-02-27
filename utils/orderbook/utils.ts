@@ -33,25 +33,25 @@ const ordersListToRedBlackTree = (ordersRecords: OrderRecord[]) => {
   }, mapped);
 };
 
-const convertAllOrdersIntoRedBlackTrees = (
-  ordersRecords: Array<OrderRecord>
-) => {
-  // ETH<>USDC and USDC<>ETH will be two separate groupings here
-  const orderGroups = groupBy(
-    ordersRecords,
-    (o) => `${o.order.makerToken}-${o.order.takerToken}`
-  );
-  const groups = Object.values(orderGroups);
+// const convertAllOrdersIntoRedBlackTrees = (
+//   ordersRecords: Array<OrderRecord>
+// ) => {
+//   // ETH<>USDC and USDC<>ETH will be two separate groupings here
+//   const orderGroups = groupBy(
+//     ordersRecords,
+//     (o) => `${o.order.chainId}-${o.order.makerToken}-${o.order.takerToken}`
+//   );
+//   const groups = Object.values(orderGroups);
 
-  groups.map((ordersForPairDirection) => {
-    ordersForPairDirection.forEach((order) => {
-      // TODO
-      order.price = 10000;
-      order.amount = 12000000;
-    });
+//   groups.map((ordersForPairDirection) => {
+//     ordersForPairDirection.forEach((order) => {
+//       // TODO
+//       order.price = 10000;
+//       order.amount = 12000000;
+//     });
 
-    return ordersListToRedBlackTree(ordersForPairDirection);
-  });
-};
+//     return ordersListToRedBlackTree(ordersForPairDirection);
+//   });
+// };
 
-export { ordersListToRedBlackTree, convertAllOrdersIntoRedBlackTrees };
+export { ordersListToRedBlackTree };
