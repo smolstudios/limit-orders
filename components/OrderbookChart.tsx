@@ -54,7 +54,7 @@ const OrderbookChart = withTooltip(
             { price: d.price, amount: d.amount },
           ];
           if (acc.prev === undefined) return { prev: d, list: curr };
-          console.log(acc.prev.price);
+          // console.log(acc.prev.price);
 
           let step = [{ price: d.price, amount: acc.prev.amount }];
           let newL = acc.list.concat(step).concat(curr); // step/curr order
@@ -257,16 +257,16 @@ const OrderbookChart = withTooltip(
             x2={xMax}
             y1={0}
             y2={yMax}
-            stroke={"var(--light-blue"}
+            stroke={lightBlue}
           />
           <line
             x1={xMin}
             x2={xMin}
             y1={0}
             y2={yMax}
-            stroke={"var(--light-blue"}
+            stroke={lightBlue}
           />
-          <line x1={xMin} x2={xMax} y1={0} y2={0} stroke={"var(--light-blue"} />
+          <line x1={xMin} x2={xMax} y1={0} y2={0} stroke={lightBlue} />
         </svg>
       </div>
     );
