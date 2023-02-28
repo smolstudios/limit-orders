@@ -3,7 +3,9 @@ import { get, has, fromPairs } from "@collectable/red-black-tree";
 import { first, groupBy, range } from "lodash";
 import { LRUCache } from "typescript-lru-cache";
 import { buildOrderbookOrdersGetUrl } from "./api";
+import { OrderBook, OrderTree } from "./order-tree";
 import type {
+  Order,
   OrderbookPaginatedFetchResult,
   OrderExtendedAsNode,
   OrderRecord,
@@ -33,8 +35,12 @@ const handleFetchOrdersWithRSCSupport = async (url: string, _fetch = fetch) => {
   return json;
 };
 
+const hashOrder = async (order: Order) => {
+  return `${order.chainId}-${order.makerToken}-${order.takerToken}`;
+};
+
 class ZeroExV4OrderbookRepository implements IOrderbookRepository {
-  private _cache: LRUCache<string, string>;
+  private _cache: LRUCache<string, OrderTree>;
   private _fetch: (
     input: RequestInfo | URL,
     init?: RequestInit | undefined
@@ -85,15 +91,19 @@ class ZeroExV4OrderbookRepository implements IOrderbookRepository {
     return allPages;
   };
 
-   getRBTreeHash = (makerToken: string, takerToken: string, chainId: string) => {
-    return `${chainId}-${makerToken}-${takerToken}`
-  }
+  getOrderCacheKey = (
+    makerToken: string,
+    takerToken: string,
+    chainId: string
+  ) => {
+    return `${chainId}-${makerToken}-${takerToken}`;
+  };
 
-  getRBTreeForPairDirection = (makerToken: string, takerToken: string, chainId: string) => {
-    const hash = this.getRBTreeHash(makerToken, takerToken, chainId)
-    const maybeRBTree = this._cache.get(hash)
-    return maybeRBTree;
-  }
+  // getRBTreeForPairDirection = (makerToken: string, takerToken: string, chainId: string) => {
+  //   const hash = this.getOrderCacheKey(makerToken, takerToken, chainId)
+  //   const maybeRBTree = this._cache.get(hash)
+  //   return maybeRBTree;
+  // }
 
   async ingestOrders(
     orderRecords: OrderRecord[],
@@ -125,23 +135,17 @@ class ZeroExV4OrderbookRepository implements IOrderbookRepository {
     });
 
     groups.forEach((ordersForPairDirection) => {
+      const orders = ordersForPairDirection as Array<
+        OrderRecord<OrderExtendedAsNode>
+      >;
+      const orderTree = new OrderTree(orders);
       const sample = first(ordersForPairDirection);
-      if (!sample) {
-        return
-      }
-      const maybeExistingRBTree = this.getRBTreeForPairDirection(sample.order.makerToken, sample.order.takerToken, sample.order.chainId.toString(10))
-      // TODO(johnrjj) - Support mutating existing tree 
-      const mapped: [string, OrderRecord<OrderExtendedAsNode>][] = ordersForPairDirection.map((o) => {
-        return [o.metaData.orderHash, o as OrderRecord<OrderExtendedAsNode>];
-      });
-      const treeOfSortedBids = fromPairs<string, OrderRecord<OrderExtendedAsNode>>((a, b) => {
-        // TODO(johnrjj) - Compute 'price' and 'amount' in terms of pair decimals
-
-        return 0;
-      }, mapped);
-
-      get('', treeOfSortedBids)
-
+      const cacheKey = this.getOrderCacheKey(
+        sample!.order.makerToken,
+        sample!.order.takerToken,
+        sample!.order.chainId.toString(10)
+      );
+      this._cache.set(cacheKey, orderTree);
     });
   }
 

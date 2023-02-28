@@ -84,8 +84,8 @@ class OrderBook {
 
   /**
    *
-   */
-  constructor() {
+   */ 
+  constructor(bids: OrderTree, asks: OrderTree) {
     this.bids = new OrderTree();
     this.asks = new OrderTree();
   }
@@ -116,4 +116,9 @@ class OrderBook {
       return "ask";
     }
   };
+}
+
+export {
+  OrderBook,
+  OrderTree,
 }

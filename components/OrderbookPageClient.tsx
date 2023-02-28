@@ -28,6 +28,7 @@ const OrderbookPageClient = () => {
             console.log('orders', orders[0].total)
             console.log('orders.length', orders.length)
 
+            console.log('ordersRepo', ordersRepository)
             return orders;
         },
     })
