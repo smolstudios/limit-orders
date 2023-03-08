@@ -1,9 +1,8 @@
 import { DEFAULT_CACHE_TIME_FOR_ORDERS_IN_SECONDS } from "@/config/constants";
-import { get, has, fromPairs } from "@collectable/red-black-tree";
 import { first, groupBy, range } from "lodash";
 import { LRUCache } from "typescript-lru-cache";
 import { buildOrderbookOrdersGetUrl } from "./api";
-import { OrderBook, OrderTree } from "./order-tree";
+import { OrderTree } from "./order-tree";
 import type {
   Order,
   OrderbookPaginatedFetchResult,
