@@ -24,8 +24,8 @@ export interface Order {
 }
 
 export interface OrderExtendedAsNode extends Order {
-    amount: string;
-    price: bigint;
+    amount: number;
+    price: number;
 }
 
 export interface MetaData {

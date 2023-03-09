@@ -9,8 +9,8 @@ import groupBy from "lodash/groupBy";
 import { Order, OrderExtendedAsNode, OrderRecord } from "./types";
 
 class OrderTree {
-  priceTree: RedBlackTreeStructure<bigint, Order>;
-  priceMap: Map<bigint, Order[]>;
+  priceTree: RedBlackTreeStructure<number, Order>;
+  priceMap: Map<number, Order[]>;
   orderMap: Map<string, Order>;
   depth0: bigint;
   depth1: bigint;
@@ -34,9 +34,28 @@ class OrderTree {
   }
 
   loadOrders = (initialOrders: OrderRecord<OrderExtendedAsNode>[]) => {
+
+
+    let isUSDCWETHFr = false
     // Create pricee tree
     const tuples = initialOrders.map((o) => {
-      return [o.order.price, o.order] as [bigint, Order];
+
+      const usdc = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'.toLowerCase()
+      const weth = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'.toLowerCase()
+
+      let isUSDCWETH = false;
+      if (o.order.makerToken.toLowerCase() === usdc) {
+        if (o.order.takerToken.toLowerCase() === weth) {
+          isUSDCWETH = true;
+          isUSDCWETHFr = true
+        }
+      }
+
+      if (isUSDCWETH) {
+        console.log('order with usdc/weth', o)
+      }
+
+      return [o.order.price, o.order] as [number, Order];
     });
     this.priceTree = fromPairs((a, b) => {
       return Number(a - b);
@@ -67,6 +86,7 @@ class OrderTree {
     // Calculate any aggregate metrics for fast-access
     let depthMaker = 0n;
     let depthTaker = 0n;
+    this.nOrders = this.orderMap.size;
     initialOrders.forEach((o) => {
       const makerAmount = BigInt(o.order.makerAmount);
       const takerAmount = BigInt(o.order.takerAmount);
